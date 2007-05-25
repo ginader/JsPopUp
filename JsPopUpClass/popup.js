@@ -1,6 +1,6 @@
 /*
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-* JsPopUp 1.0
+* JsPopUp 1.5
 * Opening Browser-Windows the unobtrusive way
 * Dirk Ginader
 * www.ginader.de
@@ -53,11 +53,17 @@ window.onload = function(){ // Better use use a modern onDomReady-Event instead
 * http://blog.ginader.de/dev/popup.html
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 * CHANGELOG:
+1.5 New Features:
+    * Position Window to left right top bottom center (combineable! i.e: "top left" except center (just like css backgroundposition syntax)) (overwrites defaults: center, top, left)
+	  (Thanks to Henning http://www.webkrauts.de/2006/12/19/unaufdringliche-neue-browserfenster/#comment-12068)
+	* Focus already opened Window instead of reopening it
+	  (Thanks to nos http://www.webkrauts.de/2006/12/19/unaufdringliche-neue-browserfenster/#comment-10619)
 1.0 Initial Version
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 */
 PopUp = function(autoapply){
 	this.types = [];
+	this.persistantWindows = [];
 	this.defaults = {
 		width:800,
 		height:600,
@@ -69,8 +75,9 @@ PopUp = function(autoapply){
 		status:false,
 		toolbar:false,
 		menubar:false,
-		center:true,
-		title:"Dieser Link wir in einem neuen Fenster geöffnet"
+		position:"center",
+		title:"Dieser Link wir in einem neuen Fenster geöffnet",
+		persist:false
 	}
 	this.addType({
 		name:"standard",
@@ -135,10 +142,21 @@ o.getTopLeftCentered = function(typeObj){
 o.getParamsOfType = function(typeObj){
 	var t = typeObj;
 	var c = this.booleanToWord;
-	if(t.center){
+	if(t.position.indexOf("center") != -1|| t.center){
 		var tc = this.getTopLeftCentered(typeObj);
 		t.left = tc.left;
 		t.top = tc.top;
+	}else{
+		var pos = t.position.split(" ");
+		for(var i=0;i<pos.length;i++){
+			switch (pos[i]) {
+				case "left":t.left = 0;break;
+				case "right":t.left = screen.availWidth-t.width-10;break;
+				case "top":t.top = 0;break;
+				case "bottom":t.top = screen.availHeight-t.height-20;break;
+				default:break;
+			}
+		}
 	}
 	var p = "width="+t.width;
 	p+=",height="+t.height;
@@ -156,7 +174,12 @@ o.open = function(url,type){
 	if(!type) type = "standard";
 	var t = this.types[type];
 	var p = this.getParamsOfType(t);
-	var w = window.open(url,t.name,p);
+	if(t.persist && this.persistantWindows[t.name]){
+		var w = this.persistantWindows[t.name];
+	}else{
+		var w = window.open(url,t.name,p);
+		if(t.persist) this.persistantWindows[t.name] = w;
+	}
 	if(w) w.focus();
 	return false;
 }

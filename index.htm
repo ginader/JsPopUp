@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>JsPopup Demo</title>
+		<script language="JavaScript" type="text/javascript" src="JsPopUpClass/popup.js"></script>
+		<script type="text/javascript">
+			window.onload = function(){ // Better use use a modern onDomReady-Event instead
+				if(document.getElementById && document.getElementsByTagName){ // DOM available?
+					popup = new PopUp();
+					popup.addType({
+						name: "pdf",
+						width: 800,
+						height: 900,
+						location:true,
+						title:"Dieses PDF Dokument wir in einem neuen Fenster geöffnet"
+					});
+					popup.addType({
+						name: "doc",
+						width: 100,
+						height: 100,
+						resizable:true,
+						title:"Dieses Word Dokument wir in einem neuen Fenster geöffnet"
+					});
+					popup.addType({
+						name: "extern",
+						width: 200,
+						height: 200,
+						scrollbars:true,
+						center:false,
+						title:"Dieser Link verweiste auf eine andere Domain und wird in einem neuen Fenster geöffnet"
+					});
+					popup.addType({
+						name: "info",
+						width: 300,
+						height: 300,
+						top: 300,
+						status:true
+					});
+					popup.apply();
+					//popup.open("http://www.webkrauts.de");	
+					//popup.open("http://www.webkrauts.de","extern");	
+				}
+			}
+		</script>
+	</head>
+	
+	<body>
+		<p>Ich bin nur ein Link <a href="http://www.ginader.de">ohne</a> irgendwelche Klassen </p>
+		<p><a class="popup" href="http://www.ginader.de">Ich</a> bin nur ein Link mit der Klasse "popup"</p>
+		<p>Ich <a class="popup pdf" href="http://www.bartenbach.de">bin</a> nur ein Link mit der Klasse &quot;popup&quot; und der Klasse &quot;pdf&quot; </p>
+		<p>Ich bin <a class="popup doc" href="http://promotion.bartenbach.de">nur</a> ein Link mit der Klasse &quot;popup&quot; und der Klasse &quot;doc&quot; </p>
+		<p>Ich bin nur <a class="popup extern" href="http://b2b.bartenbach.de">ein</a> Link mit der Klasse &quot;popup&quot; und der Klasse &quot;extern&quot; </p>
+		<p>Ich bin nur ein <a class="popup info" href="http://interactive.bartenbach.de">Link mit der Klasse &quot;popup&quot;</a> und der Klasse &quot;info&quot; </p>
+		<p>Ich bin nur ein <a class="popup info bla" href="http://interactive.bartenbach.de">Link mit der Klasse &quot;popup&quot;</a> und der Klasse &quot;info&quot; und der Klasse &quot;bla&quot; (ohne Funktion)</p>
+	</body>
+</html>

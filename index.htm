@@ -6,52 +6,77 @@
 		<script language="JavaScript" type="text/javascript" src="JsPopUpClass/popup.js"></script>
 		<script type="text/javascript">
 			window.onload = function(){ // Better use use a modern onDomReady-Event instead
-				if(document.getElementById && document.getElementsByTagName){ // DOM available?
-					popup = new PopUp();
-					popup.addType({
-						name: "pdf",
-						width: 800,
-						height: 900,
-						location:true,
-						title:"Dieses PDF Dokument wir in einem neuen Fenster geöffnet"
-					});
-					popup.addType({
-						name: "doc",
-						width: 100,
-						height: 100,
-						resizable:true,
-						title:"Dieses Word Dokument wir in einem neuen Fenster geöffnet"
-					});
-					popup.addType({
-						name: "extern",
-						width: 200,
-						height: 200,
-						scrollbars:true,
-						center:false,
-						title:"Dieser Link verweiste auf eine andere Domain und wird in einem neuen Fenster geöffnet"
-					});
-					popup.addType({
-						name: "info",
-						width: 300,
-						height: 300,
-						top: 300,
-						status:true
-					});
-					popup.apply();
-					//popup.open("http://www.webkrauts.de");	
-					//popup.open("http://www.webkrauts.de","extern");	
+				if(window.location.search != '?noscript'){
+					if(document.getElementById && document.getElementsByTagName){ // DOM available?
+						popup = new PopUp();
+						popup.addType({
+							name: "pdf",
+							width: 800,
+							height: 900,
+							location:true,
+							title:"Dieses PDF Dokument wir in einem neuen Fenster geöffnet"
+						});
+						popup.addType({
+							name: "doc",
+							width: 500,
+							height: 300,
+							resizable:true,
+							position: "top right",
+							title:"Dieses Word Dokument wir in einem neuen Fenster geöffnet"
+						});
+						popup.addType({
+							name: "extern",
+							width: 1000,
+							height: 700,
+							top:30,
+							left:100,
+							scrollbars:true,
+							center:false,
+							title:"Dieser Link verweist auf eine andere Domain und wird in einem neuen Fenster geöffnet"
+						});
+						popup.addType({
+							name: "info",
+							persist:true,
+							width: 500,
+							height: 500,
+							status:true,
+							position: "bottom right"
+						});
+						popup.apply();
+						//popup.open("http://www.webkrauts.de");	
+						//popup.open("http://www.webkrauts.de","info");	
+					}
 				}
 			}
 		</script>
+		<style type="text/css">
+			a.popup{
+				padding-left:1em;
+				background-image:url(pics/ico-popup.gif);
+				background-repeat:no-repeat;
+				background-position:0 4px;		
+			}
+			a.pdf{background-image:url(pics/ico-pdf.gif);}
+			a.doc{background-image:url(pics/ico-doc.gif);}
+			a.info{background-image:url(pics/ico-info.gif);}
+		</style>
 	</head>
 	
 	<body>
-		<p>Ich bin nur ein Link <a href="http://www.ginader.de">ohne</a> irgendwelche Klassen </p>
-		<p><a class="popup" href="http://www.ginader.de">Ich</a> bin nur ein Link mit der Klasse "popup"</p>
-		<p>Ich <a class="popup pdf" href="http://www.bartenbach.de">bin</a> nur ein Link mit der Klasse &quot;popup&quot; und der Klasse &quot;pdf&quot; </p>
-		<p>Ich bin <a class="popup doc" href="http://promotion.bartenbach.de">nur</a> ein Link mit der Klasse &quot;popup&quot; und der Klasse &quot;doc&quot; </p>
-		<p>Ich bin nur <a class="popup extern" href="http://b2b.bartenbach.de">ein</a> Link mit der Klasse &quot;popup&quot; und der Klasse &quot;extern&quot; </p>
-		<p>Ich bin nur ein <a class="popup info" href="http://interactive.bartenbach.de">Link mit der Klasse &quot;popup&quot;</a> und der Klasse &quot;info&quot; </p>
-		<p>Ich bin nur ein <a class="popup info bla" href="http://interactive.bartenbach.de">Link mit der Klasse &quot;popup&quot;</a> und der Klasse &quot;info&quot; und der Klasse &quot;bla&quot; (ohne Funktion)</p>
-	</body>
+		<p><a href="?">mit</a>/<a href="?noscript">ohne</a> Javascript </p>
+		<ul>
+		  <li><strong>Ich bin nur <a href="testwindow1.php">ein Link</a> ohne irgendwelche Klassen </strong><br />
+		  (Link wird sich in diesem Fenster &ouml;ffnen!)</li>
+          <li><strong>Ich bin nur <a class="popup" href="testwindow2.php">ein Link</a> mit der Klasse "popup"</strong><br />
+          (Link &ouml;ffnet sich in einem neuen Fenster  mit den Basiseigenschaften: Breite 800px, H&ouml;he 600px, zentriert auf dem Bildschirm)</li>
+	      <li><strong>Ich bin nur <a class="popup pdf" href="testwindow1.php">ein Link</a> mit der Klasse &quot;popup&quot; und der Klasse &quot;pdf&quot; </strong><br />
+	      (Link &ouml;ffnet sich in einem neuen Fenster mit den Eigenschaften: Breite 800px, H&ouml;he 900px, zentriert auf dem Bildschirm und der Anzeige der  Adressezeile)</li>
+	      <li><strong>Ich bin nur <a class="popup doc" href="testwindow2.php">ein Link</a> mit der Klasse &quot;popup&quot; und der Klasse &quot;doc&quot; </strong><br />
+	        (Link &ouml;ffnet sich in einem neuen Fenster mit den Eigenschaften: Breite 500px, H&ouml;he 300px, oben rechts auf dem Bildschirm. Die gr&ouml;&szlig;e ist ver&auml;nderbar)</li>
+	      <li><strong>Ich bin nur <a class="popup extern" href="testwindow1.php">ein Link</a> mit der Klasse &quot;popup&quot; und der Klasse &quot;extern&quot;</strong><br />
+          (Link &ouml;ffnet sich in einem neuen Fenster mit den Eigenschaften: Breite 1000px, H&ouml;he 700px, 30px von oben und 100px von links auf dem Bildschirm. Ein Scrollbalken wird angezeigt)</li>
+	      <li><strong>Ich bin nur <a class="popup info" href="testwindow2.php">ein Link</a> mit der Klasse &quot;popup&quot; und der Klasse &quot;info&quot;</strong><br />
+          (Link &ouml;ffnet sich in einem neuen Fenster mit den Eigenschaften: Breite 500px, H&ouml;he 500px, unten rechts auf dem Bildschirm. Die Statuszeile wird angezeigt. Das Fenster ist Persistent (ein erneuter Klick auf den Link wird das PopUp nicht erneut laden, sondern das bestehende Fenster in den Vordergrund holen)</li>
+	</ul>
+</body>
 </html>

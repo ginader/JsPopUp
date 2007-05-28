@@ -58,6 +58,7 @@ window.onload = function(){ // Better use use a modern onDomReady-Event instead
 	  (Thanks to Henning http://www.webkrauts.de/2006/12/19/unaufdringliche-neue-browserfenster/#comment-12068)
 	* Focus already opened Window instead of reopening it
 	  (Thanks to nos http://www.webkrauts.de/2006/12/19/unaufdringliche-neue-browserfenster/#comment-10619)
+	* Add the class "jspopup" to the Bodytag after applying the Functionality to allow different styles
 1.0 Initial Version
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 */
@@ -91,15 +92,39 @@ PopUp = function(autoapply){
 	if(autoapply) this.apply();
 }
 o = PopUp.prototype;
+o.getClassesNamesOf = function(l){
+	return l.className.split(" ");
+}
+o.hasClassName = function(el,className){
+	var classNames = this.getClassesNamesOf(el);
+	for(var i=0,l=classNames.length;i<l;i++){
+		if(classNames[i] == className) return true;
+	}
+	return false;
+}
+o.addClassName = function(el,className){
+	var classNames = this.getClassesNamesOf(el);
+	classNames[classNames.length] = className;
+	el.className = classNames.join(" ");
+}
+o.removeClassName = function(el,className){
+	var classNames = this.getClassesNamesOf(el);
+	for(var i=0,l=classNames.length;i<l;i++){
+		if(classNames[i] == className) classNames[i]="";
+	}
+	el.className = classNames.join(" ");
+}
 o.apply = function(){
 	var links = document.getElementsByTagName("a");
 	if(!links) return;
 	for(var i=0;i<links.length;i++){
 		var l = links[i];
-		if(l.className.indexOf("popup") > -1){
+		if(this.hasClassName(l,"popup")){
 			this.attachBehavior(l,this.getType(l));
 		}
 	}
+	var b = document.getElementsByTagName("body")[0];
+	this.addClassName(b,"jspopup");
 }
 o.addType = function(type){
 	for(var prop in this.defaults){
@@ -109,7 +134,7 @@ o.addType = function(type){
 }
 o.getType = function(l){
 	for(var type in this.types){
-		if(l.className.indexOf(type) > -1) return type;
+		if(this.hasClassName(l,type)) return type;
 	}
 	return "standard";
 }

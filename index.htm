@@ -3,6 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<title>JsPopup Demo</title>
+		<script language="javascript" type="text/javascript" src="firebug/firebug.js"></script>
 		<script language="JavaScript" type="text/javascript" src="JsPopUpClass/popup.js"></script>
 		<script type="text/javascript">
 			window.onload = function(){ // Better use use a modern onDomReady-Event instead
@@ -50,15 +51,15 @@
 			}
 		</script>
 		<style type="text/css">
-			a.popup{
+			body.jspopup a.popup{
 				padding-left:1em;
 				background-image:url(pics/ico-popup.gif);
 				background-repeat:no-repeat;
 				background-position:0 4px;		
 			}
-			a.pdf{background-image:url(pics/ico-pdf.gif);}
-			a.doc{background-image:url(pics/ico-doc.gif);}
-			a.info{background-image:url(pics/ico-info.gif);}
+			body.jspopup a.pdf{background-image:url(pics/ico-pdf.gif);}
+			body.jspopup a.doc{background-image:url(pics/ico-doc.gif);}
+			body.jspopup a.info{background-image:url(pics/ico-info.gif);}
 		</style>
 	</head>
 	

@@ -77,9 +77,9 @@ PopUp = function(autoapply){
 		toolbar:false,
 		menubar:false,
 		position:"center",
-		title:"Dieser Link wir in einem neuen Fenster geöffnet",
+		title:"Dieser Link wir in einem neuen Fenster ge&ouml;ffnet",
 		persist:false
-	}
+	};
 	this.addType({
 		name:"standard",
 		location:true,
@@ -111,7 +111,7 @@ o.removeClassName = function(el,className){
 	var classNames = this.getClassesNamesOf(el);
 	for(var i=0,l=classNames.length;i<l;i++){
 		if(classNames[i] == className) classNames[i]="";
-	}
+	};
 	el.className = classNames.join(" ");
 }
 o.apply = function(){
@@ -121,21 +121,21 @@ o.apply = function(){
 		var l = links[i];
 		if(this.hasClassName(l,"popup")){
 			this.attachBehavior(l,this.getType(l));
-		}
-	}
+		};
+	};
 	var b = document.getElementsByTagName("body")[0];
 	this.addClassName(b,"jspopup");
 }
 o.addType = function(type){
 	for(var prop in this.defaults){
 		if(type[prop] == undefined) type[prop] = this.defaults[prop];
-	}
+	};
 	this.types[type.name] = type;
 }
 o.getType = function(l){
 	for(var type in this.types){
 		if(this.hasClassName(l,type)) return type;
-	}
+	};
 	return "standard";
 }
 o.attachBehavior = function(l,type){
@@ -148,7 +148,7 @@ o.attachBehavior = function(l,type){
 	l.onclick = function(){
 		this.popupProperties.ref.open(this.href,this.popupProperties.type);
 		return false;
-	}
+	};
 }
 o.booleanToWord = function(bool){
 	if(bool) return "yes";
@@ -180,9 +180,9 @@ o.getParamsOfType = function(typeObj){
 				case "top":t.top = 0;break;
 				case "bottom":t.top = screen.availHeight-t.height-20;break;
 				default:break;
-			}
-		}
-	}
+			};
+		};
+	};
 	var p = "width="+t.width;
 	p+=",height="+t.height;
 	p+=",left="+t.left;
@@ -204,7 +204,7 @@ o.open = function(url,type){
 	}else{
 		var w = window.open(url,t.name,p);
 		if(t.persist) this.persistantWindows[t.name] = w;
-	}
+	};
 	if(w) w.focus();
 	return false;
 }

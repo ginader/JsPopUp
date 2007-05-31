@@ -10,6 +10,11 @@
 				if(window.location.search != '?noscript'){
 					if(document.getElementById && document.getElementsByTagName){ // DOM available?
 						popup = new PopUp();
+						popup.setRemoveReApplyLink({
+							containerId: "remove-reapply",
+							removeText: "Popups in diesem Dokument in Standard Links konvertieren",
+							reApplyText: "PopUps in diesem Dokument wieder aktivieren"
+						});
 						popup.addType({
 							name: "pdf",
 							width: 800,
@@ -65,6 +70,7 @@
 	
 	<body>
 		<p><a href="?">mit</a>/<a href="?noscript">ohne</a> Javascript </p>
+		<p id="remove-reapply"></p>
 		<ul>
 		  <li><strong>Ich bin nur <a href="testwindow1.htm">ein Link</a> ohne irgendwelche Klassen </strong><br />
 		  (Link wird sich in diesem Fenster &ouml;ffnen!)</li>

@@ -60,6 +60,7 @@ window.onload = function(){ // Better use use a modern onDomReady-Event instead
 	  (Thanks to nos http://www.webkrauts.de/2006/12/19/unaufdringliche-neue-browserfenster/#comment-10619)
 	* Add the class "jspopup" to the Bodytag after applying the Functionality to allow different styles
 	* New Method to completely remove the Popup Behavior by the User
+	* New option "multiple" that prevents opening windows of the same type in the same window
 1.0 Initial Version
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 */
@@ -80,6 +81,7 @@ PopUp = function(autoapply){
 		status:false,
 		toolbar:false,
 		menubar:false,
+		multiple:false,
 		position:"center",
 		title:"Dieser Link wir in einem neuen Fenster ge&ouml;ffnet",
 		persist:false
@@ -225,6 +227,7 @@ o.open = function(url,type){
 	if(!type) type = "standard";
 	var t = this.types[type];
 	var p = this.getParamsOfType(t);
+	if(t.multiple) t.name = "_blank";
 	if(t.persist && this.persistantWindows[t.name]){
 		var w = this.persistantWindows[t.name];
 	}else{

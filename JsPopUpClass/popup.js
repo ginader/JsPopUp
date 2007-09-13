@@ -228,7 +228,7 @@ o.open = function(url,type){
 	var t = this.types[type];
 	var p = this.getParamsOfType(t);
 	if(t.multiple) t.name = "_blank";
-	if(t.persist && this.persistantWindows[t.name]){
+	if(t.persist && this.persistantWindows[t.name] && !this.persistantWindows[t.name].closed){
 		var w = this.persistantWindows[t.name];
 	}else{
 		var w = window.open(url,t.name,p);

@@ -61,6 +61,9 @@ window.onload = function(){ // Better use use a modern onDomReady-Event instead
 	* Add the class "jspopup" to the Bodytag after applying the Functionality to allow different styles
 	* New Method to completely remove the Popup Behavior by the User
 	* New option "multiple" that prevents opening windows of the same type in the same window
+	Bug Fixes: 
+	* fixed the Bug in Ticket #12 that prevented reopening a closed persistent window
+	
 1.0 Initial Version
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 */

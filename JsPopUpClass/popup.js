@@ -3,7 +3,7 @@
 * JsPopUp 1.5
 * Opening Browser-Windows the unobtrusive way
 * Dirk Ginader
-* www.ginader.de
+* blog.ginader.de
 * dirk@ginader.de
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 * degrades nicely, unobtrusive
@@ -99,7 +99,7 @@ PopUp = function(autoapply){
 		menubar:true
 	});
 	if(autoapply) this.apply();
-}
+};
 o = PopUp.prototype;
 
 o.setRemoveReApplyLink = function(config){
@@ -119,17 +119,17 @@ o.setRemoveReApplyLink = function(config){
 			this.innerHTML = this.ref.removeReApplyConfig.removeText;	
 		}
 	};
-}
+};
 o.deactivate = function(){
 	this.active = false;
 	this.removeClassName(this.docbody,"jspopup");
 	this.setLinkTitlesToActiveState();
-}
+};
 o.reactivate = function(){
 	this.active = true;
 	this.setLinkTitlesToActiveState();
 	this.addClassName(this.docbody,"jspopup");
-}
+};
 o.setLinkTitlesToActiveState = function(){
 	for(var i=0,l=this.popuplinks.length;i<l;i++){
 		var a = this.popuplinks[i];
@@ -139,7 +139,7 @@ o.setLinkTitlesToActiveState = function(){
 			a.title = a.defaulttitle;
 		}
 	}
-}
+};
 o.apply = function(){
 	var links = document.getElementsByTagName("a");
 	if(!links) return;
@@ -154,19 +154,19 @@ o.apply = function(){
 	};
 	this.addClassName(this.docbody,"jspopup");
 	this.active = true;
-}
+};
 o.addType = function(type){
 	for(var prop in this.defaults){
 		if(type[prop] == undefined) type[prop] = this.defaults[prop];
 	};
 	this.types[type.name] = type;
-}
+};
 o.getType = function(l){
 	for(var type in this.types){
 		if(this.hasClassName(l,type)) return type;
 	};
 	return "standard";
-}
+};
 o.attachBehavior = function(l,type){
 	var t = this.types[type];
 	l.defaulttitle = l.title;
@@ -179,11 +179,11 @@ o.attachBehavior = function(l,type){
 		this.popupProperties.ref.open(this.href,this.popupProperties.type);
 		return (!this.popupProperties.ref.active);
 	};
-}
+};
 o.booleanToWord = function(bool){
 	if(bool) return "yes";
 	return "no";
-}
+};
 o.getTopLeftCentered = function(typeObj){
 	var t = typeObj;
 	var r = {left:t.left, top:t.top};
@@ -193,7 +193,7 @@ o.getTopLeftCentered = function(typeObj){
 	r.left = (sw/2)-(t.width/2);
 	r.top = (sh/2)-(t.height/2);
 	return r;
-}
+};
 o.getParamsOfType = function(typeObj){
 	var t = typeObj;
 	var c = this.booleanToWord;
@@ -224,7 +224,7 @@ o.getParamsOfType = function(typeObj){
 	p+=",toolbar="+c(t.toolbar);
 	p+=",menubar="+c(t.menubar);
 	return p;
-}
+};
 o.open = function(url,type){
 	if(!this.active) return true;
 	if(!type) type = "standard";
@@ -239,27 +239,27 @@ o.open = function(url,type){
 	};
 	if(w) w.focus();
 	return false;
-}
+};
 //Classname Tools
 o.getClassesNamesOf = function(l){
 	return l.className.split(" ");
-}
+};
 o.hasClassName = function(el,className){
 	var classNames = this.getClassesNamesOf(el);
 	for(var i=0,l=classNames.length;i<l;i++){
 		if(classNames[i] == className) return true;
 	}
 	return false;
-}
+};
 o.addClassName = function(el,className){
 	var classNames = this.getClassesNamesOf(el);
 	classNames[classNames.length] = className;
 	el.className = classNames.join(" ");
-}
+};
 o.removeClassName = function(el,className){
 	var classNames = this.getClassesNamesOf(el);
 	for(var i=0,l=classNames.length;i<l;i++){
 		if(classNames[i] == className) classNames[i]="";
 	};
 	el.className = classNames.join(" ");
-}
+};

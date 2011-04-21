@@ -1,6 +1,6 @@
 /*
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-* JsPopUp 1.5
+* JsPopUp 1.6
 * Opening Browser-Windows the unobtrusive way
 * Dirk Ginader
 * blog.ginader.de
@@ -53,8 +53,10 @@ window.onload = function(){ // Better use use a modern onDomReady-Event instead
 * http://blog.ginader.de/dev/popup.html
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 * CHANGELOG:
+1.6 New Feature:
+	* default classname "jspopup" is now changeable as 2nd param to the constructor (thanks to Sven Rhinow for the hint)
 1.5 New Features:
-    * Position Window to left right top bottom center (combineable! i.e: "top left" except center (just like css backgroundposition syntax)) (overwrites defaults: center, top, left)
+	* Position Window to left right top bottom center (combineable! i.e: "top left" except center (just like css backgroundposition syntax)) (overwrites defaults: center, top, left)
 	  (Thanks to Henning http://www.webkrauts.de/2006/12/19/unaufdringliche-neue-browserfenster/#comment-12068)
 	* Focus already opened Window instead of reopening it
 	  (Thanks to nos http://www.webkrauts.de/2006/12/19/unaufdringliche-neue-browserfenster/#comment-10619)
@@ -67,7 +69,8 @@ window.onload = function(){ // Better use use a modern onDomReady-Event instead
 1.0 Initial Version
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 */
-PopUp = function(autoapply){
+PopUp = function(autoapply,baseclass){
+	this.baseclass = baseclass || "popup";
 	this.types = [];
 	this.persistantWindows = [];
 	this.popuplinks = [];
@@ -147,7 +150,7 @@ o.apply = function(){
 	if(!this.docbody) return;	
 	for(var i=0;i<links.length;i++){
 		var l = links[i];
-		if(this.hasClassName(l,"popup")){
+		if(this.hasClassName(l,this.baseclass)){
 			this.popuplinks[this.popuplinks.length] = l;
 			this.attachBehavior(l,this.getType(l));
 		};

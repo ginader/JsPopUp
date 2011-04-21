@@ -10,6 +10,8 @@
 				if(window.location.search != '?noscript'){
 					if(document.getElementById && document.getElementsByTagName){ // DOM available?
 						popup = new PopUp();
+    					//popup = new PopUp(true);
+    					//popup = new PopUp(false,'bla'); //new 2nd param that overwrites the default classname "popup"
 						popup.setRemoveReApplyLink({
 							containerId: "remove-reapply",
 							removeText: "Popups in diesem Dokument in Standard Links konvertieren",
